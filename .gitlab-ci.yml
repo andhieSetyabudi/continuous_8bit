@@ -1,0 +1,15 @@
+image: python:2.7
+
+stages:
+ - test
+
+before_script:
+  - "cp lib/Config/Config.example.h lib/Config/Config.h"
+  - "pip install -U platformio"
+  - "platformio lib --storage-dir /lib install"
+
+job:
+  stage: test
+  script: "pio run"
+  variables:
+    PLATFORMIO_CI_SRC: src/main.cpp
